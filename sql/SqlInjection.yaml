@@ -1,0 +1,69 @@
+id: sql-injection-test
+info:
+  name: SQL Injection Test
+  description: Test for SQL injection vulnerabilities
+  severity: high
+  tags:
+    - sqli
+    - injection
+
+requests:
+- name: SQL Injection
+  method: GET
+  path:
+    - '{{BaseURL}}/search'
+    - '{{BaseURL}}/search.php'
+    - '{{BaseURL}}/search/index.php'
+    - '{{BaseURL}}/search/results.php'
+    - '{{BaseURL}}/search/results'
+    - '{{BaseURL}}/search/page'
+    - '{{BaseURL}}/search/page.php'
+    - '{{BaseURL}}/search?q='
+    - '{{BaseURL}}/search.php?q='
+    - '{{BaseURL}}/search/index.php?q='
+    - '{{BaseURL}}/search/results.php?q='
+    - '{{BaseURL}}/search/results?q='
+    - '{{BaseURL}}/search/page?q='
+    - '{{BaseURL}}/search/page.php?q='
+  params:
+  
+    - name: q
+      value:
+        - "'"
+        - "\""
+        - ";"
+        - "-"
+        - "--"
+        - "#"
+        - "/*"
+        - "*/"
+        - "\\"
+        - "%"
+        - "_"
+        - "<"
+        - ">"
+        - "|"
+        - "^"
+        - "&"
+        - "("
+        - ")"
+   
+  matchers:
+    - type: word
+      words:
+        - "error"
+        - "syntax"
+        - "mysql"
+        - "sql server"
+        - "postgresql"
+        - "oracle"
+        - "db2"
+        - "sqlite"
+    - type: status
+      status:
+        - 500
+        - 503
+        - 403
+        - 400
+        - 200
+  

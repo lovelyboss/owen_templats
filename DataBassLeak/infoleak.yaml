@@ -1,0 +1,84 @@
+id: uploads-information leakage
+info:
+  name: Database Information Leakage
+  severity: medium
+  description: Test for database information leakage by accessing sensitive data
+  author: Your Name
+  reference: https://www.owasp.org/index.php/Testing_for_Database_Information_Leakage
+  tags:
+    - database
+    - information-leakage
+    - sql
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}/admin"
+      - "{{BaseURL}}/config"
+      - "{{BaseURL}}/user"
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/robots.txt"
+      - "{{BaseURL}}/directory/"
+      - "{{BaseURL}}/dir/"
+      - "{{BaseURL}}/files/"
+      - "{{BaseURL}}/uploads/"
+      - "{{BaseURL}}/upload/"
+      - "{{BaseURL}}/data/"
+      - "{{BaseURL}}/backup/"
+      - "{{BaseURL}}/admin/"
+      - "{{BaseURL}}/wp-admin/"
+      - "{{BaseURL}}/admin-panel/"
+      - "{{BaseURL}}/wp-admin.php"
+      - "{{BaseURL}}/wp-login.php"
+      - "{{BaseURL}}/phpinfo.php"
+      - "{{BaseURL}}/backup.tar.gz"
+      - "{{BaseURL}}/backup.zip"
+      - "{{BaseURL}}/backup.tar"
+      - "{{BaseURL}}/backup.tgz"
+      - "{{BaseURL}}/backup.old"
+      - "{{BaseURL}}/backup.bak"
+      - "{{BaseURL}}/backup.sql"
+      - "{{BaseURL}}/backup.db"
+      - "{{BaseURL}}/access.log"
+      - "{{BaseURL}}/error.log"
+      - "{{BaseURL}}/debug.log"
+      - "{{BaseURL}}/info.log"
+      - "{{BaseURL}}/application.log"
+      - "{{BaseURL}}/server.log"
+      - "{{BaseURL}}/app.log"
+      - "{{BaseURL}}/audit.log"
+      - "{{BaseURL}}/access.log"
+      - "{{BaseURL}}/error.log"
+      - "{{BaseURL}}/debug.log"
+      - "{{BaseURL}}/debug_log"
+      - "{{BaseURL}}/info.log"
+      - "{{BaseURL}}/info_log"
+      - "{{BaseURL}}/application.log"
+      - "{{BaseURL}}/application_log"
+      - "{{BaseURL}}/server.log"
+      - "{{BaseURL}}/server_log"
+      - "{{BaseURL}}/app.log"
+      - "{{BaseURL}}/audit.log"
+      - "{{BaseURL}}/sitemape.xml"
+      - "{{BaseURL}}/.gitignore"
+      - "{{BaseURL}}/.git/config"
+      - "{{BaseURL}}/.github"
+      - "{{BaseURL}}/LICENSE"
+      - "{{BaseURL}}/README.md"
+      - "{{BaseURL}}/docker-compose.yml"
+      - "{{BaseURL}}/docker-compose.yaml"
+      - "{{BaseURL}}/dockerfile"
+      - "{{BaseURL}}/package.json"
+      - "{{BaseURL}}/requirements.txt"
+      - "{{BaseURL}}/Gemfile"
+      - "{{BaseURL}}/Gemfile.lock"
+      - "{{BaseURL}}/Pipfile"
+      - "{{BaseURL}}/Pipfile.lock"
+      - "{{BaseURL}}/composer.json"
+      - "{{BaseURL}}/composer.lock"
+
+        
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          

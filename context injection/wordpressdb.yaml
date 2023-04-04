@@ -1,0 +1,14 @@
+id: worderpress-db-leake
+info:
+  name: worderpress-db-leake
+  severity: low
+  author: lovelyboss
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}/wp-config.php.save"
+    matchers:
+      - type: word
+        words:
+          - "wordpress"
+          - "wp"

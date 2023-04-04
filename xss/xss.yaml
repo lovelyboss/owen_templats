@@ -1,0 +1,16 @@
+id: xss-all-params
+info:
+  name: XSS Test - All Parameters
+  author: Your Name
+  severity: high
+  description: Test all parameters for XSS vulnerabilities using various payloads
+
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+             
+    matchers:
+      - type: word
+        words:
+          - "<script>alert(1)</script>"

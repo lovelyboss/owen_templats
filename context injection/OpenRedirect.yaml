@@ -1,0 +1,16 @@
+id: open-redirect
+info:
+  name: open-redirect vulnerabiliti
+  severity: medium
+  author: lovelyboss
+requests:
+    - method: GET
+      path:
+        - "{{BaseURL}}/?returnto=%2f%5c%2f%5c%2f%5c%2fhttp://evil.com"
+        - "{{BaseURL}}/Tried = @evil.com ?"
+      matchers:
+        - type: word
+          part: body
+          words:
+            - "evil.com"
+      

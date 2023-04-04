@@ -1,0 +1,35 @@
+id: php-admin-page
+info:
+  name: php admin page
+  severity: medium
+  author: lovelyboss
+requests:
+   - method: GET
+     path:
+       - "{{BaseURL}}/phpmyadmin/scripts/setup.php"
+       - "{{BaseURL}}/_phpmyadmin/scripts/setup.php"
+       - "{{BaseURL}}/forum/phpmyadmin/scripts/setup.php"
+       - "{{BaseURL}}/php/phpmyadmin/scripts/etup.php"
+       - "{{BaseURL}}/typo3/phpmyadmin/scripts/setup.php"
+       - "{{BaseURL}}/xampp/phpmyadmin/scripts/setup.php"
+       - "{{BaseURL}}/sysadmin/phpMyAdmin/scripts/setup.php"
+       - "{{BaseURL}}/phpmyadmin/setup/index.php"
+       - "{{BaseURL}}/pma/setup/index.php"
+       - "{{BaseURL}}/admin/pma/setup/index.php"
+       - "{{BaseURL}}/phpmyadmin/setup/"
+       - "{{BaseURL}}/setup/index.php"
+       - "{{BaseURL}}/admin/"
+       - "{{BaseURL}}/phpmyadmin/setup/"
+       - "{{BaseURL}}/phpMyadmin/setup/index.php"
+       - "{{BaseURL}}/Phomyadmin/setup/index.php"
+       - "{{BaseURL}}/phpmyAdmin/setup/index.php"
+       - "{{BaseURL}}/_phpomyadmin/setup/index.php"
+       - "{{BaseURL}}/ 11/phpmyadmin_old/setup/index.php"
+     matchers-condition:
+     matchers:
+       - type: word
+         part: body
+         words:
+           - "phpmyadmin"
+           - "admin"
+

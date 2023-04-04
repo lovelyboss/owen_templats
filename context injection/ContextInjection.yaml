@@ -1,0 +1,24 @@
+id: Arbitrary-Text-Injection
+
+info:
+  name: Arbitrary Text Injection
+  author: Lovelyboy
+  severity: low
+  tags:  injection
+
+  
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}/!!!ATENTION!!!_This_site_is_on_Maintenance_please_go_to_WWW.EVIL.COM"
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        part: body
+        words:
+          - "!!!ATENTION!!!_This_site_is_on_Maintenance_please_go_to_WWW.EVIL.COM"
+
+
+#Hackerone Report
+#https://hackerone.com/reports/327671
